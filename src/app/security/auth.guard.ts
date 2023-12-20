@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
 
         console.log(role);
 
-        if (!token || role !== 'ADMIN') {
+        if ((token != null && token != undefined) || role !== 'ADMIN') {
             this.route.navigate(['login'])
             return false;
         }

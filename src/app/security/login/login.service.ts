@@ -13,6 +13,24 @@ export class LoginService {
     constructor(private httpClient: HttpClient) {
     }
 
+    registrar(nome: string, email: string, senha: string): Observable<any> {
+        const URL = `${environment.urlBase}/auth/registrar`;
+
+        let body = {
+            nome: nome,
+            email: email,
+            senha: senha
+        }
+
+        return this.httpClient.post(URL, body, { responseType: 'json' }).pipe(
+            map((response) => this.salvarTokenLocalStorage(response)),
+            catchError((err) => {
+                this.removerTokenLocalStorage();
+                throw err?.error?.message || 'Falha ao registrar!';
+            })
+        )
+    }
+
 
     login(email: string, senha: string): Observable<any> {
         const URL = `${environment.urlBase}/auth/login`;
