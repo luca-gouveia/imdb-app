@@ -1,0 +1,46 @@
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { map, catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+
+
+@Injectable({
+    providedIn: 'root',
+})
+export class LoginService {
+    constructor(private httpClient: HttpClient) {
+    }
+
+
+    login(email: string, senha: string): Observable<any> {
+        const URL = `${environment.urlBase}/auth/login`;
+
+        let body = {
+            email: email,
+            senha: senha
+        }
+
+        return this.httpClient.post(URL, body, { responseType: 'json' }).pipe(
+            map((response) => this.salvarTokenLocalStorage(response)),
+            catchError((err) => {
+                this.removerTokenLocalStorage();
+                throw 'Falha ao realizar o login.'
+            })
+        )
+
+    }
+
+    recuperarToken(): string | null {
+        return localStorage.getItem(environment.token);
+    }
+
+    private salvarTokenLocalStorage(response: any): void {
+        const { token } = response;
+        localStorage.setItem(environment.token, token)
+    }
+
+    private removerTokenLocalStorage(): void {
+        localStorage.removeItem(environment.token);
+    }
+}
