@@ -13,11 +13,11 @@ export class AuthGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
         const token = this.loginService.recuperarToken();
         const tokenInfo = this.loginService.decodificarToken(token);
-        const role = tokenInfo.role; 
+        const role = tokenInfo?.role; 
 
         console.log(role);
 
-        if ((token != null && token != undefined) || role !== 'ADMIN') {
+        if (!token || role !== 'ADMIN') {
             this.route.navigate(['login'])
             return false;
         }
