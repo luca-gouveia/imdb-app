@@ -16,4 +16,8 @@ export class LayoutComponent implements OnInit {
   isLogado(): boolean {
     return !!this.loginService.recuperarToken();
   }
+
+  sair(): void {
+    this.loginService.sair();
+  }
 }

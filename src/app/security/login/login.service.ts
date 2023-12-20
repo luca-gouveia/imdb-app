@@ -62,6 +62,10 @@ export class LoginService {
         }
     }
 
+    sair() {
+        this.removerTokenLocalStorage();
+    }
+
     private salvarTokenLocalStorage(response: any): void {
         const { token } = response;
         localStorage.setItem(environment.token, token)
