@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { jwtDecode } from 'jwt-decode';
 
 
 @Injectable({
@@ -33,6 +34,14 @@ export class LoginService {
 
     recuperarToken(): string | null {
         return localStorage.getItem(environment.token);
+    }
+
+    decodificarToken(token: string | null): any {
+        try {
+            return token ? jwtDecode(token) : null;
+        } catch (Error) {
+            return null;
+        }
     }
 
     private salvarTokenLocalStorage(response: any): void {

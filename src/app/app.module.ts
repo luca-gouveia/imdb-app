@@ -10,7 +10,10 @@ import { CadastroComponent } from './security/cadastro/cadastro.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { HomeComponent } from './pages/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { UsuariosListComponent } from './pages/usuarios/usuarios-list/usuarios-list.component';
+import { AuthInterceptor } from './security/auth.interceptor';
+import { AuthGuard } from './security/auth.guard';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     CadastroComponent,
     LayoutComponent,
-    HomeComponent
+    HomeComponent,
+    UsuariosListComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +33,15 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
