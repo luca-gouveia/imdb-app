@@ -1,1 +1,16 @@
-<div class="container"></div>
+<div class="container">
+
+    <div class="titulo shadow" *ngFor="let titulo of lista">
+        <div class="img-titulo">
+            <img src="../../../assets/default-image.jpg" alt="">
+        </div>
+        <div class="descricao-titulo">
+            <p>{{ titulo.titulo }}</p>
+        </div>
+        <div class="descricao-titulo nota">
+            <p>{{ titulo.avaliacao }}
+                <span class="material-icons-round star">star_rate</span>
+            </p>
+        </div>
+    </div>
+</div>

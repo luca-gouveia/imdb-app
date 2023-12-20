@@ -1,0 +1,54 @@
+.titulo {
+    width: 220px;
+    height: 320px;
+    margin: 2em;
+    transition: .3s linear all;
+}
+
+.titulo:hover {
+    transform: scale(1.2);
+}
+
+.img-titulo {
+    width: 220px;
+    height: 230px;
+    overflow: hidden;
+}
+
+.img-titulo img {
+    width: 400px;
+    height: 300px;
+    margin: -75px 0 0 -100px;
+}
+
+.descricao-titulo {
+    font-weight: 500;
+    margin: 5px;
+}
+
+.descricao-titulo p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.nota p {
+    font-size: 18px;
+}
+
+.star {
+    font-size: 17px;
+}
+
+.container {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-between;
+}
+
+.container::before,
+.container::after {
+    content: '';
+    width: 100%;
+    order: 1;
+}
