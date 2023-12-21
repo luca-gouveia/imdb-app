@@ -16,7 +16,11 @@ export class TituloService {
     recuperarTodos(): Observable<Titulo[]> {
         const URL = `${environment.urlBase}/catalogo`
 
-        return this.httpClient.get(URL).pipe(
+        let params = new HttpParams();
+
+        params = params.append('sort', 'id,desc');
+
+        return this.httpClient.get(URL, { params: params }).pipe(
             map(this.converterParaTitulos)
         )
 
@@ -73,6 +77,27 @@ export class TituloService {
             map((response) => {response}),
             catchError((err: any) => {
                 throw 'Falha ao avaliar.'
+            })
+        )
+    }
+
+    cadastrar(titulo?: string, genero?: string, diretor?: string, atores?: string, descricao?: string, imdbID?: string, linkImagem?: string): Observable<any> {
+        const URL = `${environment.urlBase}/catalogo`;
+
+        let body = {
+            titulo: titulo,
+            genero: [genero],
+            diretor: diretor,
+            atores: atores,
+            descricao: descricao,
+            imdbID: imdbID,
+            linkImagem: linkImagem
+        }
+
+        return this.httpClient.post(URL, body, { responseType: 'json' }).pipe(
+            map((response) => {response}),
+            catchError((err: any) => {
+                throw 'Falha ao salvar.'
             })
         )
     }

@@ -15,6 +15,7 @@ import { UsuariosListComponent } from './pages/usuarios/usuarios-list/usuarios-l
 import { AuthInterceptor } from './security/auth.interceptor';
 import { AuthGuard } from './security/auth.guard';
 import { TituloComponent } from './pages/titulo/titulo.component';
+import { TituloCadastroComponent } from './pages/titulo-cadastro/titulo-cadastro.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { TituloComponent } from './pages/titulo/titulo.component';
     LayoutComponent,
     HomeComponent,
     UsuariosListComponent,
-    TituloComponent
+    TituloComponent,
+    TituloCadastroComponent
   ],
   imports: [
     BrowserModule,
