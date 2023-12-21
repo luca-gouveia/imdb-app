@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Titulo } from '../usuarios/shared/titulo.model';
 import { TituloService } from '../usuarios/shared/titulo.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class HomeComponent implements OnInit {
   lista: Array<Titulo> = [];
 
-  constructor(private tituloService: TituloService, private toast: ToastrService) { }
+  constructor(private tituloService: TituloService, private toast: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
     this.recuperarTodos();
@@ -26,6 +27,12 @@ export class HomeComponent implements OnInit {
         this.toast.error(err?.error?.message);
       }
     )
+  }
+
+  abrirTitulo(id?: Number) {
+    if (id) {
+      this.router.navigate([`titulo/${id}`]);
+    }
   }
 
 }

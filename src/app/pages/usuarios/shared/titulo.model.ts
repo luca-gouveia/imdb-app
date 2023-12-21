@@ -9,6 +9,6 @@ export class Titulo {
         public linkImagem?: string,
         public genero?: string[],
         public avaliacao?: Number,
-        public isAvaliado?: boolean,
+        public avaliado?: boolean,
     ) {}
 }

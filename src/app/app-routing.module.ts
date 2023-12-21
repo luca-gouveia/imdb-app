@@ -13,7 +13,7 @@ const routes: Routes = [
     path: '', component: LayoutComponent,
     children: [
       { path: '', component: HomeComponent },
-      { path: 'titulo', component: TituloComponent },
+      { path: 'titulo/:id', component: TituloComponent },
       { path: 'usuarios', loadChildren: () => import('./pages/usuarios/usuarios.module').then(module => module.UsuariosModule), canActivate: [AuthGuard] }
     ]
   },

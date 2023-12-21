@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 
 export class AuthGuard implements CanActivate {
-    constructor(private loginService: LoginService, private route: Router) { }
+    constructor(private loginService: LoginService, private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
         const token = this.loginService.recuperarToken();
@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
         console.log(role);
 
         if (!token || role !== 'ADMIN') {
-            this.route.navigate(['login'])
+            this.router.navigate(['login'])
             return false;
         }
         return true;

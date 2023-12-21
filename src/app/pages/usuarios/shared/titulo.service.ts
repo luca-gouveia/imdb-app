@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { environment } from 'src/environments/environment';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Titulo } from './titulo.model';
 
 
@@ -11,12 +11,12 @@ import { Titulo } from './titulo.model';
 })
 export class TituloService {
 
-    constructor(private http: HttpClient) {}
+    constructor(private httpClient: HttpClient) {}
 
     recuperarTodos(): Observable<Titulo[]> {
         const URL = `${environment.urlBase}/catalogo`
 
-        return this.http.get(URL).pipe(
+        return this.httpClient.get(URL).pipe(
             map(this.converterParaTitulos)
         )
 
@@ -25,17 +25,32 @@ export class TituloService {
     recuperarPorId(id: number): Observable<Titulo> {
         const URL = `${environment.urlBase}/catalogo/${id}`
 
-        return this.http.get(URL).pipe(
+        return this.httpClient.get(URL).pipe(
             map(this.converteParaTitulo)
         )
-
     }
 
     editar(client: Titulo): Observable<Titulo> {
         const URL = `${environment.urlBase}/catalogo/${client.id}`
 
-        return this.http.put(URL, client).pipe(
+        return this.httpClient.put(URL, client).pipe(
             map(this.converteParaTitulo)
+        )
+    }
+
+    avaliar(idItemCatalogo: number, nota: number): Observable<any> {
+        const URL = `${environment.urlBase}/catalogo/avaliar`;
+
+        let body = {
+            idItemCatalogo: idItemCatalogo,
+            nota: nota
+        }
+
+        return this.httpClient.post(URL, body, { responseType: 'json' }).pipe(
+            map((response) => {response}),
+            catchError((err: any) => {
+                throw 'Falha ao avaliar.'
+            })
         )
     }
 

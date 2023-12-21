@@ -13,7 +13,7 @@
 </div>
 
 <div class="titulo-container">
-    <div class="titulo shadow" *ngFor="let titulo of lista">
+    <div class="titulo shadow" *ngFor="let titulo of lista"  (click)="abrirTitulo(titulo.id)">
         <div class="img-titulo">
             <img src="../../../assets/default-image.jpg" alt="" *ngIf="!titulo.linkImagem">
         </div>
