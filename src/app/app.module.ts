@@ -14,6 +14,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UsuariosListComponent } from './pages/usuarios/usuarios-list/usuarios-list.component';
 import { AuthInterceptor } from './security/auth.interceptor';
 import { AuthGuard } from './security/auth.guard';
+import { TituloComponent } from './pages/titulo/titulo.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AuthGuard } from './security/auth.guard';
     CadastroComponent,
     LayoutComponent,
     HomeComponent,
-    UsuariosListComponent
+    UsuariosListComponent,
+    TituloComponent
   ],
   imports: [
     BrowserModule,

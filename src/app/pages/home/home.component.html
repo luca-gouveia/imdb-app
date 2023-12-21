@@ -2,13 +2,13 @@
 
     <div class="titulo shadow" *ngFor="let titulo of lista">
         <div class="img-titulo">
-            <img src="../../../assets/default-image.jpg" alt="">
+            <img src="../../../assets/default-image.jpg" alt="" *ngIf="!titulo.linkImagem">
         </div>
         <div class="descricao-titulo">
             <p>{{ titulo.titulo }}</p>
         </div>
         <div class="descricao-titulo nota">
-            <p>{{ titulo.avaliacao }}
+            <p>{{ titulo?.avaliacao?.toFixed(2) }}
                 <span class="material-icons-round star">star_rate</span>
             </p>
         </div>

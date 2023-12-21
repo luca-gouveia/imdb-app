@@ -3,6 +3,9 @@
     height: 320px;
     margin: 2em;
     transition: .3s linear all;
+    border-radius: 10px;
+    background-color: #212529;
+    color: white;
 }
 
 .titulo:hover {
@@ -38,6 +41,7 @@
 
 .star {
     font-size: 17px;
+    color: #ffc107;
 }
 
 .container {

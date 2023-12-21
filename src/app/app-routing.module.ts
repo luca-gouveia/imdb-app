@@ -5,6 +5,7 @@ import { CadastroComponent } from './security/cadastro/cadastro.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './security/auth.guard';
+import { TituloComponent } from './pages/titulo/titulo.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
     path: '', component: LayoutComponent,
     children: [
       { path: '', component: HomeComponent },
+      { path: 'titulo', component: TituloComponent },
       { path: 'usuarios', loadChildren: () => import('./pages/usuarios/usuarios.module').then(module => module.UsuariosModule), canActivate: [AuthGuard] }
     ]
   },
