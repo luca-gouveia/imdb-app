@@ -1,7 +1,6 @@
 <div class="table-reponsive">
 
-    <table class="table">
-
+    <table class="table table-hover">
         <thead>
             <tr class="text-center">
                 <th>ID</th>
@@ -16,8 +15,6 @@
                 </th>
             </tr>
         </thead>
-
-
         <tbody>
             <tr *ngFor="let usuario of listaUsuarios">
                 <td class="text-center">{{usuario.id}}</td>
@@ -39,8 +36,6 @@
         </tbody>
     </table>
 </div>
-
-
 
 <div class="modal fade" id="addUsuario" target="-1">
     <div class="modal-dialog">

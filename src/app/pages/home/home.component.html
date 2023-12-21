@@ -1,5 +1,18 @@
-<div class="container">
 
+
+<div class="container">
+    <div class="input-group rounded">
+        <input type="search" class="form-control rounded search-input" placeholder="Buscar por TÍTULO" aria-label="Search" aria-describedby="search-addon" />
+        <button type="button" class="btn btn-warning">
+          <span class="material-icons-round text-dark search">search</span>
+        </button>
+        <button type="button" class="btn btn-warning">
+            <span class="material-icons-round text-dark search">filter_list</span>
+          </button>
+      </div>
+</div>
+
+<div class="titulo-container">
     <div class="titulo shadow" *ngFor="let titulo of lista">
         <div class="img-titulo">
             <img src="../../../assets/default-image.jpg" alt="" *ngIf="!titulo.linkImagem">

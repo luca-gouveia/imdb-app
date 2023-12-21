@@ -6,6 +6,7 @@
     border-radius: 10px;
     background-color: #212529;
     color: white;
+    cursor: pointer;
 }
 
 .titulo:hover {
@@ -44,15 +45,25 @@
     color: #ffc107;
 }
 
-.container {
+.titulo-container {
     display: flex;
     flex-flow: row wrap;
     align-content: space-between;
 }
 
-.container::before,
-.container::after {
+.titulo-container::before,
+.titulo-container::after {
     content: '';
     width: 100%;
     order: 1;
+}
+
+.search {
+    font-size: 19px;
+    margin: 5px;
+}
+
+.search-input {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
 }

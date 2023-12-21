@@ -21,10 +21,14 @@ export class CadastroComponent implements OnInit {
 
   criarForm(): FormGroup {
     return this.formBuilder.group({
-      nome: ["", [Validators.required]],
-      email: ["", [Validators.required]],
-      senha: ["", [Validators.required]]
+      nome: [null, [Validators.required]],
+      email: [null, [Validators.required]],
+      senha: [null, [Validators.required]]
     })
+  }
+
+  isFormControlInvalid(campo: string): boolean {
+    return !!(this.formRegistro.get(campo)?.invalid && this.formRegistro.get(campo)?.touched)
   }
 
   registrar() {

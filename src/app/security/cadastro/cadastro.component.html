@@ -23,19 +23,28 @@
                     <div class="mb-3">
                         <label class="form-label">Nome</label>
                         <input type="text" class="form-control" formControlName="nome">
+                        <div class="form-text text-danger" *ngIf="isFormControlInvalid('nome')">
+                            O nome deve ser preenchido!
+                        </div>
                     </div>
                      <div class="mb-3">
                          <label class="form-label">Email</label>
                          <input type="text" class="form-control" formControlName="email">
+                         <div class="form-text text-danger" *ngIf="isFormControlInvalid('email')">
+                            O email deve ser preenchido!
+                        </div>
                      </div>
                      <div class="mb-3">
                          <label class="form-label">Senha</label>
                          <input type="password" class="form-control" formControlName="senha">
+                         <div class="form-text text-danger" *ngIf="isFormControlInvalid('senha')">
+                            A senha deve ser preenchida!
+                        </div>
                      </div>
 
                      <span>Possui uma conta? <a href="/login" class="link"> Acessar</a></span>
  
-                     <button type="button" class="btn btn-warning w-100 mt-2" (click)="registrar()">
+                     <button type="button" class="btn btn-warning w-100 mt-2" (click)="registrar()" [disabled]="!formRegistro.valid" >
                          Cadastrar
                      </button>
                  </form>
