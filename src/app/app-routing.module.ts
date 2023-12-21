@@ -7,6 +7,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './security/auth.guard';
 import { TituloComponent } from './pages/titulo/titulo.component';
 import { TituloCadastroComponent } from './pages/titulo-cadastro/titulo-cadastro.component';
+import { UsuariosEditComponent } from './pages/usuarios-edit/usuarios-edit.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
       { path: '', component: HomeComponent },
       { path: 'titulo/:id', component: TituloComponent },
       { path: 'titulo-cadastro', component: TituloCadastroComponent, canActivate: [AuthGuard] },
+      { path: 'usuarios/editar/:id', component: UsuariosEditComponent, canActivate: [AuthGuard] },
       { path: 'usuarios', loadChildren: () => import('./pages/usuarios/usuarios.module').then(module => module.UsuariosModule), canActivate: [AuthGuard] }
     ]
   },

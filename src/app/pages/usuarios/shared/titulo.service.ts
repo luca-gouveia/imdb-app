@@ -57,10 +57,10 @@ export class TituloService {
         )
     }
 
-    editar(client: Titulo): Observable<Titulo> {
-        const URL = `${environment.urlBase}/catalogo/${client.id}`
+    editar(titulo: Titulo): Observable<Titulo> {
+        const URL = `${environment.urlBase}/catalogo/${titulo.id}`
 
-        return this.httpClient.put(URL, client).pipe(
+        return this.httpClient.put(URL, titulo).pipe(
             map(this.converteParaTitulo)
         )
     }

@@ -1,9 +1,9 @@
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
-import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Usuario } from '../shared/usario.model'
+import { environment } from 'src/environments/environment';
+import { Usuario } from '../shared/usario.model';
 
 
 @Injectable({
@@ -31,17 +31,20 @@ export class UsuarioService {
 
     }
 
-    editar(client: Usuario): Observable<Usuario> {
-        const URL = `${environment.urlBase}/usuarios/${client.id}`
+    editar(id: number, nome: string, email: string): Observable<Usuario> {
+        const URL = `${environment.urlBase}/usuarios/${id}`
 
-        return this.http.put(URL, client).pipe(
+        return this.http.put(URL, {
+            nome: nome,
+            id: id,
+            email: email
+        }).pipe(
             map(this.converteParaUsuario)
         )
     }
 
-
-    desativar(clientId: Number): Observable<any> {
-        const URL = `${environment.urlBase}/usuarios/${clientId}`
+    desativar(usuarioID: Number): Observable<any> {
+        const URL = `${environment.urlBase}/usuarios/${usuarioID}`
         return this.http.delete(URL, { responseType: 'json' })
     }
 
