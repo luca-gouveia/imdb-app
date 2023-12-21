@@ -1,6 +1,7 @@
 <div class="row">
     <div class="col-3">
         <div class="img-titulo">
+            <img src="../../../assets/default-image.jpg" alt="" *ngIf="!titulo?.linkImagem">
         </div>
     </div>
     <div class="col-6">
@@ -10,8 +11,6 @@
 
             <p>{{titulo?.diretor}}</p>
             <p>{{titulo?.atores}}</p>
-
-
 
             <p class="bold">Gênero:</p>
             <ul *ngFor="let item of titulo?.genero">

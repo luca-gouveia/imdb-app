@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Titulo } from '../usuarios/shared/titulo.model';
 import { TituloService } from '../usuarios/shared/titulo.service';
-import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,11 +12,20 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   lista: Array<Titulo> = [];
+  titulo: string | undefined;
+  diretor: string | undefined;
+  atores: string | undefined;
+  genero: string = '';
+
+  listaGeneros: string[] = [];
+
+  mostrarFiltro: boolean = false;
 
   constructor(private tituloService: TituloService, private toast: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
     this.recuperarTodos();
+    this.recuperarGeneros();
   }
 
   recuperarTodos() {
@@ -35,4 +45,38 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  limparFiltro() {
+    this.titulo = '';
+    this.diretor = '';
+    this.atores = '';
+    this.genero = '';
+
+    this.recuperarTodos();
+  }
+
+  buscar() {
+    if (this.titulo|| this.diretor || this.atores || this.genero) {
+      this.tituloService.buscar(this.titulo, this.diretor, this.atores, this.genero).subscribe(
+        res => {
+          this.lista = res;
+        },
+        err => {
+          this.toast.error(err?.error?.message);
+        }
+      )
+    }
+  }
+
+  recuperarGeneros() {
+    this.tituloService.recuperarGeneros().subscribe(
+      res => {
+        this.listaGeneros = res;
+        console.log(res);
+        
+      },
+      err => {
+        this.toast.error(err?.error?.message);
+      }
+    )
+  }
 }

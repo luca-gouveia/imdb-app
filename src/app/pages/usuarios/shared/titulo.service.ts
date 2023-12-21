@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { environment } from 'src/environments/environment';
 import { catchError, map } from 'rxjs/operators';
@@ -20,6 +20,29 @@ export class TituloService {
             map(this.converterParaTitulos)
         )
 
+    }
+
+    buscar(titulo?: string, diretor?: string, atores?: string, genero?: string): Observable<Titulo[]> {
+        const URL = `${environment.urlBase}/catalogo/buscar`;
+
+        let params = new HttpParams();
+
+        params = params.append('titulo', titulo || "");
+        params = params.append('diretor', diretor || "");
+        params = params.append('atores', atores || "");
+        params = params.append('genero', genero || "");
+
+        return this.httpClient.get(URL, { params: params }).pipe(
+            map(this.converterParaTitulos)
+        )
+    }
+
+    recuperarGeneros(): Observable<string[]> {
+        const URL = `${environment.urlBase}/catalogo/generos`
+
+        return this.httpClient.get(URL).pipe(
+            map(this.converterParaGeneroString)
+        )
     }
 
     recuperarPorId(id: number): Observable<Titulo> {
@@ -58,6 +81,14 @@ export class TituloService {
         const lista: Titulo[] = [];
 
         data.content.forEach((e: any) => lista.push(Object.assign(new Titulo, e)))
+
+        return lista;
+    }
+
+    private converterParaGeneroString(data: any): Array<string> {
+        const lista: string[] = [];
+
+        data.generos.forEach((e: string) => lista.push(e))
 
         return lista;
     }
