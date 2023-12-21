@@ -40,7 +40,7 @@ export class UsuarioService {
     }
 
 
-    desativar(clientId: number): Observable<any> {
+    desativar(clientId: Number): Observable<any> {
         const URL = `${environment.urlBase}/usuarios/${clientId}`
         return this.http.delete(URL, { responseType: 'json' })
     }

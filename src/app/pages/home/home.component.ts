@@ -71,8 +71,6 @@ export class HomeComponent implements OnInit {
     this.tituloService.recuperarGeneros().subscribe(
       res => {
         this.listaGeneros = res;
-        console.log(res);
-        
       },
       err => {
         this.toast.error(err?.error?.message);

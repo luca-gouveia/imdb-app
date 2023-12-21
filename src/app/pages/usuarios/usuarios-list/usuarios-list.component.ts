@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../shared/usuario.service';
 import { Usuario } from '../shared/usario.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-usuarios-list',
@@ -10,7 +11,7 @@ import { Usuario } from '../shared/usario.model';
 export class UsuariosListComponent implements OnInit {
   listaUsuarios: Array<Usuario> = [];
 
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(private usuarioService: UsuarioService, private toast: ToastrService) { }
 
   ngOnInit(): void {
     this.usuarioService.recuperarTodos().subscribe(
@@ -18,8 +19,20 @@ export class UsuariosListComponent implements OnInit {
     )
   }
 
-  remover(arg0: any) {
-    throw new Error('Method not implemented.');
+  remover(id?: Number | null | number) {
+    if (id) {
+      this.usuarioService.desativar(id).subscribe(
+        res => {},
+        err => {
+          if (err?.status === 200) {
+            this.toast.success(err?.error?.text);
+            window.location.reload();
+          } else {
+            this.toast.error(err?.error?.message);
+          }
+        }
+      )
+    }
   }
 
 }
